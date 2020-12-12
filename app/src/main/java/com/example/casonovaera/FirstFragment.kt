@@ -65,7 +65,7 @@ class FirstFragment : Fragment(), productoAdapter.PasstheData {
 
         val mBundle=Bundle()
 
-        mBundle.putString("id",mFrut.image)   //put debe ser int o string según corresponda
+        mBundle.putInt("id",mFrut.id)   //put debe ser int o string según corresponda
 
 
         //llega el registro a editar

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.*
 import com.example.casonovaera.R
 import com.example.casonovaera.model.local.MaestraEntity
 import kotlinx.android.synthetic.main.primer.view.*
@@ -55,6 +57,9 @@ class productoAdapter  (var mPasstheData:PasstheData):RecyclerView.Adapter<produ
             //llena el xml con los objetos del listado, une los datos con los elementos
 
             val mfrut= mData[position]
+
+            with(holder.itemView.context).load(mData[position].image).into(holder.imagen)
+
             holder.mitemView= mfrut.id
             holder.nombreUno.text=mfrut.name
            // holder.precioUno= mfrut.price
