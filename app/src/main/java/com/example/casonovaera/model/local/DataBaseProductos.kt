@@ -11,6 +11,7 @@ abstract class DataBaseProductos : RoomDatabase() {
 
     //Método para Dao
     abstract fun getproductosDao(): Daoproductos
+    abstract fun getdetalleDao(): Daodetalles
 
     companion object {  //permite acceder a el sin necesidad de crear el objeto de la clase, nombre clase + punto y acceso a lo que está en el companen objet
         @Volatile
