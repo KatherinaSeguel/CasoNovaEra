@@ -16,15 +16,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Repository  (private val producDao: Daoproductos, val detaDao:Daodetalles) {
+class Repository  (private val producDao: Daoproductos) {
     private val service = RetrofitClient.getRetrofitClient()
     val mLiveData = producDao.getOneProductosByID(mid = 0)
     val mLiveDataPri=producDao.getAllProductos()
 
     private val servicede = RetrofitClient.getRetrofitClient()
-    val mLiveDatade = detaDao.getOneDetalleByID(mid = 0)
+    val mLiveDatade = producDao.getOneDetalleByID(mid = 0)
 
-    val mLiveDataPride=detaDao.getAllDetalle()
+    val mLiveDataPride=producDao.getAllDetalle()
 
 
 
@@ -83,7 +83,7 @@ class Repository  (private val producDao: Daoproductos, val detaDao:Daodetalles)
 
                             Log.d("Info",it.toString())
 
-                            detaDao.insertAllDetalle(converterde(listOf(it)))
+                            producDao.insertAllDetalle(converterde(listOf(it)))
 
 
                         }
@@ -133,7 +133,7 @@ class Repository  (private val producDao: Daoproductos, val detaDao:Daodetalles)
     //segundo fragmanto
     //Este elemento será observado por la vista cuando le pase el Id
     fun getOnedetallekByID(id:Int): LiveData<List<DetalleEntity>> {
-        return detaDao.getOneDetalleByID(id)
+        return producDao.getOneDetalleByID(id)
     }
 
 
