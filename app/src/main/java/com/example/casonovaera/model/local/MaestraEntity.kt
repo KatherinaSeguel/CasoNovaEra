@@ -9,9 +9,6 @@ data class MaestraEntity (
     @PrimaryKey  @NotNull val id: Int,
     val image: String,
     val name: String,
-    val price: Int,
-    val credit: Boolean,
-    val description: String,
-    val lastPrice: Int
+    val price: Int
      )
 
