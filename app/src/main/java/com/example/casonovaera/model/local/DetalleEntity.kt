@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import org.jetbrains.annotations.NotNull
 
-@Entity(tableName = "maestra_table2")
+@Entity(tableName = "tabla_detalles")
 data class DetalleEntity (
     @PrimaryKey @NotNull val id: Int,
     val credit: Boolean,

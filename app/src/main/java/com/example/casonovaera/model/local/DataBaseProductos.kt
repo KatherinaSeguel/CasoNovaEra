@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 private const val DATA_BESE_NAME= "Productos_db"
-@Database(entities=[MaestraEntity::class], version=1 )
+@Database(entities=[MaestraEntity::class,DetalleEntity::class], version=1 )
 abstract class DataBaseProductos : RoomDatabase() {
 
     //Método para Dao

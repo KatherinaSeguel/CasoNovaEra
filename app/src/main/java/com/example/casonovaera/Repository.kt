@@ -16,15 +16,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Repository  (private val producDao: Daoproductos, val detalleDao:Daodetalles) {
+class Repository(private val producDao: Daoproductos) {
     private val service = RetrofitClient.getRetrofitClient()
     val mLiveData = producDao.getOneProductosByID(mid = 0)
     val mLiveDataPri=producDao.getAllProductos()
 
-    private val servicede = RetrofitClient.getRetrofitClient()
-    val mLiveDatade = producDao.getOneDetalleByID(mid = 0)
 
-    val mLiveDataPride=producDao.getAllDetalle()
 
 
 
@@ -63,40 +60,6 @@ class Repository  (private val producDao: Daoproductos, val detalleDao:Daodetall
         }
 
 
-    //La vieja confiable
-    fun getDataFromServerdeta(mdeta:Int) {
-        val callde = service.fetchAllDetalles()
-        callde.enqueue(object : Callback<detalleItem> {
-
-
-            override fun onFailure(call: Call<detalleItem>, t: Throwable) {
-                Log.e("Repository",t.message.toString())
-
-            }
-
-            override fun onResponse(call: Call<detalleItem>, response: Response<detalleItem>)
-            {
-                when(response.code()){
-                    //***se cambia***  in 200..299 -> mLiveData.postValue(response.body())
-                    in 200..299 -> CoroutineScope(Dispatchers.IO).launch {
-                        response.body()?.let {
-
-                            Log.d("Info",it.toString())
-
-                            producDao.insertAllDetalle(converterde(listOf(it)))
-
-
-                        }
-                    }
-                    in 300..399 -> Log.d("ERROR 300",response.errorBody().toString())
-                    in 400..499 -> Log.d("ERROR 400",response.errorBody().toString())
-                }
-            }
-
-
-        }) //llamadas asincronas
-
-    }
 
 
         // En este metodo paso de datos o objeto  ,, varieble listadoDeRazas= listadoDeFrutas
@@ -111,14 +74,7 @@ class Repository  (private val producDao: Daoproductos, val detalleDao:Daodetall
             return listadoDeproductos
         }
 
-    fun converterde(list: List<detalleItem>):List<DetalleEntity>{
 
-        var listadoDetalle:MutableList<DetalleEntity> = mutableListOf<DetalleEntity>()
-        list.map {
-            listadoDetalle.add(DetalleEntity(it.id,it.credit,it.description,it.image,it.lastPrice,it.name,it.price))
-        }
-        return listadoDetalle
-    }
 
 
 
@@ -129,12 +85,6 @@ class Repository  (private val producDao: Daoproductos, val detalleDao:Daodetall
             return producDao.getOneProductosByID(id)
         }
 
-    //esto tampoco lo había hecho
-    //segundo fragmanto
-    //Este elemento será observado por la vista cuando le pase el Id
-    fun getOnedetallekByID(id:Int): LiveData<List<DetalleEntity>> {
-        return detalleDao.getOneDetalleByID(id)
-    }
 
 
 
